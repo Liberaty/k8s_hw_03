@@ -60,6 +60,7 @@ kubectl apply -f deployment.yaml
 ```
 kubectl get pods -A
 kubectl logs pods/multitool-6d7bd49559-6clc4
+```
 
 #
 ![](1.png)
