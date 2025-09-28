@@ -110,7 +110,51 @@ spec:
 #
 
 2. После запуска увеличить количество реплик работающего приложения до 2.
+#
+***Ответ:***
+#
+Создаём манифест [deployment-replica.yaml](https://github.com/Liberaty/k8s_hw_03/blob/main/deployment-replica.yaml) с изменённым значением в поле **replicas: 2**
+#
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multitool
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: multitool
+  template:
+    metadata:
+      labels:
+        app: multitool
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+      - name: multitool
+        image: wbitt/network-multitool:latest
+        ports:
+        - containerPort: 8080
+
+```
+
+Получаем результат запущенного пода с двумя репликами
+#
+![2.1.png](https://github.com/Liberaty/k8s_hw_03/blob/main/img/2.1.png?raw=true)
+
 3. Продемонстрировать количество подов до и после масштабирования.
+#
+***Ответ:***
+#
+![1.2.png](https://github.com/Liberaty/k8s_hw_03/blob/main/img/1.2.png?raw=true)
+#
+![2.1.png](https://github.com/Liberaty/k8s_hw_03/blob/main/img/2.1.png?raw=true)
+
 4. Создать Service, который обеспечит доступ до реплик приложений из п.1.
 5. Создать отдельный Pod с приложением multitool и убедиться с помощью `curl`, что из пода есть доступ до приложений из п.1.
 
