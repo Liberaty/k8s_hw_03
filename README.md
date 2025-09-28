@@ -25,7 +25,12 @@
 ### Задание 1. Создать Deployment и обеспечить доступ к репликам приложения из другого Pod
 
 1. Создать Deployment приложения, состоящего из двух контейнеров — nginx и multitool. Решить возникшую ошибку.
+#
 ***Ответ:***
+#
+Создаём манифест [deployment.yaml](https://github.com/Liberaty/k8s_hw_03/blob/main/deployment.yaml)
+#
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -52,11 +57,11 @@ spec:
         - containerPort: 8080
 
 ```
-запускаем манефест командой 
+Запускаем манефест командой
 ```
 kubectl apply -f deployment.yaml
 ```
-после чего проверяем выполнения манефеста
+После чего проверяем выполнения манефеста
 ```
 kubectl get pods -A
 kubectl logs pods/multitool-6d7bd49559-6clc4
@@ -64,6 +69,42 @@ kubectl logs pods/multitool-6d7bd49559-6clc4
 
 #
 ![1.png](https://github.com/Liberaty/k8s_hw_03/blob/main/img/1.png?raw=true)
+
+После изучения понял, что ошибка возникает из-за того что порт 80 порт занят
+
+Далее исправляем манифест
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multitool
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multitool
+  template:
+    metadata:
+      labels:
+        app: multitool
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+      - name: multitool
+        image: wbitt/network-multitool:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: HTTP_PORT
+          value: "7080"
+```
+
+Перезапускаем и видим результат - под запустился
+#
 
 2. После запуска увеличить количество реплик работающего приложения до 2.
 3. Продемонстрировать количество подов до и после масштабирования.
