@@ -60,6 +60,7 @@ kubectl apply -f deployment.yaml
 ```
 kubectl get pods -A
 kubectl logs pods/multitool-6d7bd49559-6clc4
+#
 ![1.png](https://github.com/Liberaty/k8s_hw_03/blob/main/img/1.png?raw=true)
 
 2. После запуска увеличить количество реплик работающего приложения до 2.
