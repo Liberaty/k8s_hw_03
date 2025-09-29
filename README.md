@@ -156,6 +156,34 @@ spec:
 ![2.1.png](https://github.com/Liberaty/k8s_hw_03/blob/main/img/2.1.png?raw=true)
 
 4. Создать Service, который обеспечит доступ до реплик приложений из п.1.
+#
+***Ответ:***
+#
+Создаём манифест [service.yaml](https://github.com/Liberaty/k8s_hw_03/blob/main/service.yaml) для сервиса со следующим содержимым
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-multitool-svc
+spec:
+  selector:
+    app: multitool
+  ports:
+    - protocol: TCP
+      name: nginx
+      port: 80
+      targetPort: 80    
+    - protocol: TCP
+      name: multitool
+      port: 8080
+      targetPort: 7080
+```
+
+И проверяем:
+#
+![4.1.png](https://github.com/Liberaty/k8s_hw_03/blob/main/img/4.1.png?raw=true)
+
 5. Создать отдельный Pod с приложением multitool и убедиться с помощью `curl`, что из пода есть доступ до приложений из п.1.
 
 ------
