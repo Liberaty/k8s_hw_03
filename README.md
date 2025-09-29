@@ -270,6 +270,7 @@ spec:
   selector:
     app: nginx-init
 ```
+
 ![2.3.1.png](https://github.com/Liberaty/k8s_hw_03/blob/main/img/2.3.1.png?raw=true)
 
 4. Продемонстрировать состояние пода до и после запуска сервиса.
