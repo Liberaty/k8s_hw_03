@@ -185,6 +185,25 @@ spec:
 ![4.1.png](https://github.com/Liberaty/k8s_hw_03/blob/main/img/4.1.png?raw=true)
 
 5. Создать отдельный Pod с приложением multitool и убедиться с помощью `curl`, что из пода есть доступ до приложений из п.1.
+#
+***Ответ:***
+#
+Создаём манифест [multitool-pod.yaml](https://github.com/Liberaty/k8s_hw_03/blob/main/multitool-pod.yaml)
+#
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multitool-test
+spec:
+  containers:
+  - name: multitool
+    image: wbitt/network-multitool:latest
+```
+
+применяем его и проверяем
+#
+![5.1.png](https://github.com/Liberaty/k8s_hw_03/blob/main/img/5.1.png?raw=true)
 
 ------
 
